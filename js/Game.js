@@ -28,6 +28,7 @@ class Game {
     };
 
     startGame(){
+        console.log('new')
         // hides the div with id overlay
         document.getElementById('overlay').style.display = "none";
         // calls the getRandomPhase method
@@ -37,6 +38,13 @@ class Game {
         newPhrase.addPhraseToDisplay();
         // store the selected phase in the 'activePhase' property
         this.activePhrase = newPhrase
+        //resets preferences for a new game
+        this.missed = 0;
+        let lives = document.querySelectorAll('.tries img');
+        for (let i = 0; i < lives; i++){
+            lives[i].setAttribute('src', 'images/liveHeart.png');
+        }
+        document.getElementsByClassName("key").disabled = true;
         console.log(this.activePhrase)
     };
 
@@ -51,14 +59,15 @@ class Game {
 
     removeLife(){
         //Removes a life from the scoreboard. Replace the liveHeart.png with lostHeart.png
-        document.querySelector('.tries img').setAttribute('src', 'images/lostHeart.png');
-        document.querySelector('.tries').classList.remove('tries');
         //Increment the 'missed' property
         this.missed += 1;
         //Call the gameOver method if they've missed 5
         if (this.missed === 5) {
             this.gameOver(`Sorry, you didn't guess the phrase. Better luck next time!`, 'lose');
-        };
+        } else {
+            document.querySelector('.tries img').setAttribute('src', 'images/lostHeart.png');
+            document.querySelector('.tries').classList.remove('tries');
+        }
     };
 
     gameOver(message, cn){
@@ -71,13 +80,18 @@ class Game {
         document.getElementById('overlay').classList.add(cn);
     };
 
-    handleInteraction(target){
+    handleInteraction(e){
         //capture the clicked or chosen letter
+        let target = e.textContent
+        e.disabled = true;
         // check selected letter against phrase for match
-        if (this.activePhrase.phrase.checkLetter(target)) {
+        console.log(target)
+        if (this.activePhrase.checkLetter(target)) {
+            e.classList.add('chosen');
             // if match, letter must be displayed on the screen instead of the placeholder
             this.activePhrase.showMatchedLetter(target);
         } else {
+            e.classList.add('wrong');
             // if no match, remove a life from the scoreboard
             this.removeLife();
         }
