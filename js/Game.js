@@ -28,24 +28,31 @@ class Game {
     };
 
     startGame(){
-        console.log('new')
         // hides the div with id overlay
         document.getElementById('overlay').style.display = "none";
         // calls the getRandomPhase method
-        const phrase1 = this.getRandomPhrase()
+        const phrase1 = this.getRandomPhrase();
         // calls the addPhraseToDisplay method
-        let newPhrase = new Phrase(phrase1)
+        let newPhrase = new Phrase(phrase1);
         newPhrase.addPhraseToDisplay();
         // store the selected phase in the 'activePhase' property
-        this.activePhrase = newPhrase
+        this.activePhrase = newPhrase;
         //resets preferences for a new game
         this.missed = 0;
-        let lives = document.querySelectorAll('.tries img');
-        for (let i = 0; i < lives; i++){
-            lives[i].setAttribute('src', 'images/liveHeart.png');
+        console.log(this.activePhrase);
+        //reset hearts
+        let hearts = document.querySelectorAll('.tries img');
+        for (let i = 0; i < hearts.length; i++) {
+            hearts[i].parentNode.classList.add('active');
+            hearts[i].setAttribute('src', 'images/liveHeart.png')
         }
-        document.getElementsByClassName("key").disabled = true;
-        console.log(this.activePhrase)
+        //reset buttons
+        let keys = document.querySelectorAll('.key');
+        for (let i = 0; i < keys.length; i++) {
+            keys[i].classList.remove('chosen');
+            keys[i].classList.remove('wrong');
+            keys[i].disabled = false;
+        }
     };
 
     checkForWin(){
@@ -65,8 +72,8 @@ class Game {
         if (this.missed === 5) {
             this.gameOver(`Sorry, you didn't guess the phrase. Better luck next time!`, 'lose');
         } else {
-            document.querySelector('.tries img').setAttribute('src', 'images/lostHeart.png');
-            document.querySelector('.tries').classList.remove('tries');
+            document.querySelector('.active img').setAttribute('src', 'images/lostHeart.png');
+            document.querySelector('.active').classList.remove('active');
         }
     };
 
@@ -82,7 +89,7 @@ class Game {
 
     handleInteraction(e){
         //capture the clicked or chosen letter
-        let target = e.textContent
+        let target = e.textContent;
         e.disabled = true;
         // check selected letter against phrase for match
         console.log(target)
@@ -98,6 +105,5 @@ class Game {
         // check if the player has won the game or lost because out of lives
         // if game is won or lost, message should be displayed
         this.checkForWin();
-        
-    }
+    }  
 }
