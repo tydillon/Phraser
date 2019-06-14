@@ -1,14 +1,11 @@
-/* Treehouse FSJS Techdegree
- * Project 4 - OOP Game App
- * Phrase.js */
 // handles the creation of phrases
 
 class Phrase {
     constructor(phrase) {
         this.phrase = phrase.phrase.toLowerCase();
-        // this.splPhrase = phrase.phrase.toLowerCase().split('')
     }
 
+    //method that builds out the HTML of the phrase for the website
     addPhraseToDisplay() {
         let phraseHTML = `<ul>`
         for (let i = 0; i < this.phrase.length; i++) {
@@ -22,8 +19,8 @@ class Phrase {
         document.getElementById('phrase').innerHTML = phraseHTML
     }
 
+    //Checks to see if the letter selected by the player matches a letter in the phrase
     checkLetter(target){
-        //Checks to see if the letter selected by the player matches a letter in the phrase
         for (let i = 0; i < this.phrase.length; i++) {
             if (this.phrase[i] === target) {
                 return true;
@@ -32,11 +29,11 @@ class Phrase {
         return false;
     }
 
+    //Reveals the letter(s) on the board that matches the selection
+    //Replace 'hide' class with 'show' in CSS
     showMatchedLetter(letter){
-        //Reveals the letter(s) on the board that matches the selection
-        //Replace 'hide' class with 'show' in CSS
         let array = document.getElementsByClassName(letter);
-        for (let i = 0; i < array.length; i++) {
+        for(let i = 0; i < array.length; i++) {
             array[i].classList.remove('hide');
             array[i].classList.add('show');
         }

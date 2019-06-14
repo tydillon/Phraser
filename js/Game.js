@@ -1,7 +1,5 @@
-/* Treehouse FSJS Techdegree
- * Project 4 - OOP Game App
- * Game.js */
-// starts and ends game, handles interactions, gets a random phrase, checks for win, removes a life from the scoreboard
+//Handles the major functionality of the game
+
 class Game {
     constructor(){
         this.missed = 0;
@@ -10,6 +8,7 @@ class Game {
     };
 
     createPhrases(){
+        //generatres the phrase array
         let phrase = [
             {phrase: `nine lives`},
             {phrase: `bail out`},
@@ -19,27 +18,22 @@ class Game {
         ];
         return phrase;
     };
-
+    //generates random number and selects a random phrase from the array
     getRandomPhrase(){
-        //generates random phrase from the phrases array
         let randnum = Math.floor(Math.random() * this.phrases.length);
         let randPhrase = this.phrases[randnum];
         return randPhrase;
     };
 
+    //initiates the game each time a new game is started
     startGame(){
-        // hides the div with id overlay
         document.getElementById('overlay').style.display = "none";
-        // calls the getRandomPhase method
         const phrase1 = this.getRandomPhrase();
-        // calls the addPhraseToDisplay method
         let newPhrase = new Phrase(phrase1);
         newPhrase.addPhraseToDisplay();
-        // store the selected phase in the 'activePhase' property
         this.activePhrase = newPhrase;
         //resets preferences for a new game
         this.missed = 0;
-        console.log(this.activePhrase);
         //reset hearts
         let hearts = document.querySelectorAll('.tries img');
         for (let i = 0; i < hearts.length; i++) {
