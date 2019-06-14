@@ -47,9 +47,9 @@ h1 {
 }
 
 button {
-  margin: 6px;
+  margin: 5px;
   border: 1px solid transparent;
-  padding: .5rem 1rem;
+  padding: 1rem 7px;
   color: var(--color-keys);
   font-size: var(--font-size-medium);
   background-color: var(--color-keys-light);
@@ -94,9 +94,9 @@ button {
 
 .letter {
   font-size: var(--font-size-medium);
-  height: 65px;
-  width: 65px;
-  padding: 20px 1px 0 1px;
+  height: 35px;
+  width: 35px;
+  padding: 10px 1px 0 1px;
   margin-right: 2px;
   color: transparent;
   background: var(--color-neutral-light);
@@ -113,9 +113,9 @@ button {
   color: #fff;
   background-color: #4ac0d5;
   font-size: 20px;
-  height: 65px;
-  width: 65px;
-  padding: 20px 1px 0 1px;
+  height: 35px;
+  width: 35px;
+  padding: 10px 1px 0 1px;
   margin-right: 2px;
   border-radius: 5px;
   -webkit-animation-duration: .5s;
@@ -201,4 +201,24 @@ button {
 
 .lose a {
   color: var(--color-lose);
+}
+
+@media only screen and (min-width: 600px) {
+  .letter {
+    height: 65px;
+    width: 65px;
+    padding: 20px 1px 0 1px;
+  }
+
+  .show {
+    height: 65px;
+    width: 65px;
+    padding: 20px 1px 0 1px;
+  }
+
+  button {
+    font-size: var(--font-size-medium);
+    padding: .5rem 1rem;
+    margin: 6px;
+  }
 }
