@@ -38,7 +38,7 @@ li, ol, ul {
 h2 {
   margin: 0;
   text-transform: uppercase;
-  font-size: var(--font-size-large);
+  font-size: 45px;
   margin: 0;
 }
 
@@ -220,5 +220,10 @@ button {
     font-size: var(--font-size-medium);
     padding: .5rem 1rem;
     margin: 6px;
+  }
+
+  h2 {
+    font-size: var(--font-size-large);
+    margin: 0;
   }
 }
